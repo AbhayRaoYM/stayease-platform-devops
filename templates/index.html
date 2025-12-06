@@ -1,0 +1,27 @@
+<!-- templates/index.html -->
+{% extends "base.html" %}
+{% block title %}Home - Airbnb Clone{% endblock %}
+{% block content %}
+<section class="hero">
+    <div class="hero-content">
+        <h1>Find your next adventure</h1>
+        <form id="searchForm" class="search-form">
+            <input type="text" name="location" placeholder="Where are you going?" class="search-input">
+            <input type="date" name="check_in" placeholder="Check in" class="search-input">
+            <input type="date" name="check_out" placeholder="Check out" class="search-input">
+            <input type="number" name="guests" placeholder="Guests" min="1" class="search-input">
+            <button type="submit" class="btn btn-primary">Search</button>
+        </form>
+    </div>
+</section>
+
+<section class="listings-section">
+    <div class="container">
+        <h2>Featured Listings</h2>
+        <div id="loadingSpinner" class="loading hidden">Loading...</div>
+        <div id="listingsGrid" class="listings-grid"></div>
+    </div>
+</section>
+
+<script src="/static/js/home.js"></script>
+{% endblock %}

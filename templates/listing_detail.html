@@ -1,0 +1,93 @@
+<!-- templates/listing_detail.html -->
+{% extends "base.html" %}
+{% block title %}{{ listing.title }} - Airbnb Clone{% endblock %}
+{% block content %}
+<div class="listing-detail">
+    <div class="container">
+        <h1>{{ listing.title }}</h1>
+        <p class="listing-location">📍 {{ listing.city }}</p>
+        
+        <div class="image-gallery">
+            <div class="main-image">
+                <img id="mainImage" src="{{ listing.images[0] }}" alt="{{ listing.title }}">
+            </div>
+            <div class="thumbnail-grid">
+                {% for image in listing.images %}
+                <img src="{{ image }}" alt="Image {{ loop.index }}" class="thumbnail" onclick="changeImage('{{ image }}')">
+                {% endfor %}
+            </div>
+        </div>
+
+        <div class="listing-content">
+            <div class="listing-info">
+                <div class="host-info">
+                    <h3>Hosted by {{ listing.host.name }}</h3>
+                    <p>{{ listing.max_guests }} guests</p>
+                </div>
+
+                <div class="description">
+                    <h3>About this place</h3>
+                    <p>{{ listing.description }}</p>
+                </div>
+
+                <div class="amenities">
+                    <h3>What this place offers</h3>
+                    <ul>
+                        {% for amenity in listing.amenities %}
+                        <li>✓ {{ amenity }}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+
+                <div class="reviews">
+                    <h3>Reviews
+                        {% if listing.avg_rating %}
+                        <span class="rating">⭐ {{ "%.1f"|format(listing.avg_rating) }} ({{ listing.review_count }} reviews)</span>
+                        {% endif %}
+                    </h3>
+                    {% for review in listing.reviews %}
+                    <div class="review">
+                        <div class="review-header">
+                            <strong>{{ review.user_name }}</strong>
+                            <span class="review-rating">{{ '⭐' * review.rating }}</span>
+                        </div>
+                        <p>{{ review.comment }}</p>
+                        <small>{{ review.created_at }}</small>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+
+            <div class="booking-card">
+                <div class="price">₹{{ "%.2f"|format(listing.price_per_night) }} <span>/ night</span></div>
+                {% if listing.avg_rating %}
+                <div class="rating">⭐ {{ "%.1f"|format(listing.avg_rating) }} · {{ listing.review_count }} reviews</div>
+                {% endif %}
+                
+                <form id="bookingForm">
+                    <input type="hidden" name="listing_id" value="{{ listing.id }}">
+                    <div class="date-inputs">
+                        <div>
+                            <label>CHECK-IN</label>
+                            <input type="date" name="check_in" required>
+                        </div>
+                        <div>
+                            <label>CHECK-OUT</label>
+                            <input type="date" name="check_out" required>
+                        </div>
+                    </div>
+                    <div>
+                        <label>GUESTS</label>
+                        <input type="number" name="guests" min="1" max="{{ listing.max_guests }}" value="1" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-block">Reserve</button>
+                </form>
+                
+                <div id="priceBreakdown" class="price-breakdown hidden"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="/static/js/listing.js"></script>
+{% endblock %}

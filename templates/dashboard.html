@@ -1,0 +1,14 @@
+<!-- templates/dashboard.html -->
+{% extends "base.html" %}
+{% block title %}My Dashboard - Airbnb Clone{% endblock %}
+{% block content %}
+<div class="dashboard">
+    <div class="container">
+        <h1>My Bookings</h1>
+        <div id="loadingSpinner" class="loading">Loading bookings...</div>
+        <div id="bookingsContainer"></div>
+    </div>
+</div>
+
+<script src="/static/js/dashboard.js"></script>
+{% endblock %}

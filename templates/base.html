@@ -1,0 +1,48 @@
+<!-- templates/base.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Airbnb Clone{% endblock %}</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-content">
+                <a href="/" class="logo">🏠 Airbnb Clone</a>
+                <div class="nav-links">
+                    <a href="/">Home</a>
+                    <span class="user-menu">
+                        <button id="userMenuBtn" class="user-btn">☰ 👤</button>
+                        <div id="userDropdown" class="dropdown hidden">
+                            <div id="authLinks">
+                                <a href="/auth/signup">Sign up</a>
+                                <a href="/auth/login">Log in</a>
+                            </div>
+                            <div id="userLinks" class="hidden">
+                                <a href="/dashboard">Dashboard</a>
+                                <a href="#" id="logoutBtn">Log out</a>
+                            </div>
+                        </div>
+                    </span>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <main>
+        {% block content %}{% endblock %}
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2024 Airbnb Clone. Educational project.</p>
+        </div>
+    </footer>
+
+    <script src="/static/js/app.js"></script>
+    {% block scripts %}{% endblock %}
+</body>
+</html>

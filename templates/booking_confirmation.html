@@ -1,0 +1,63 @@
+
+<!-- templates/booking_confirmation.html -->
+{% extends "base.html" %}
+{% block title %}Booking Confirmed - Airbnb Clone{% endblock %}
+{% block content %}
+<div class="confirmation-container">
+    <div class="confirmation-box">
+        <div class="success-icon">✓</div>
+        <h1>Booking Confirmed!</h1>
+        <p>Your reservation has been successfully made.</p>
+        
+        <div class="booking-details">
+            <h3>Booking Details</h3>
+            <p><strong>Booking ID:</strong> #{{ booking.id }}</p>
+            <p><strong>Status:</strong> <span class="booking-status {% if booking.status == 'cancelled' %}cancelled{% endif %}">{{ booking.status|title }}</span></p>
+            <p><strong>Listing:</strong> {{ booking.listing_title }}</p>
+            <p><strong>Location:</strong> {{ booking.city }}</p>
+            <p><strong>Check-in:</strong> {{ booking.check_in }}</p>
+            <p><strong>Check-out:</strong> {{ booking.check_out }}</p>
+            <p><strong>Guests:</strong> {{ booking.guests }}</p>
+            <p><strong>Total:</strong> ₹{{ "%.2f"|format(booking.total_price) }}</p>
+        </div>
+        
+        <div class="confirmation-actions">
+            <a href="/dashboard" class="btn btn-primary">View My Bookings</a>
+            <a href="/" class="btn btn-secondary">Back to Home</a>
+            {% if booking.status == 'confirmed' %}
+            <button onclick="cancelThisBooking()" data-booking-id="{{ booking.id }}" id="cancelBookingBtn" class="btn-cancel" style="margin-top: 10px;">Cancel This Booking</button>
+            {% endif %}
+        </div>
+    </div>
+</div>
+
+<script>
+async function cancelThisBooking() {
+    if (!confirm('Are you sure you want to cancel this booking? This action cannot be undone.')) {
+        return;
+    }
+    
+    try {
+        const bookingId = document.getElementById('cancelBookingBtn').getAttribute('data-booking-id');
+        const response = await fetch(`/bookings/${bookingId}/cancel`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        });
+        
+        const result = await response.json();
+        
+        if (response.ok) {
+            alert('Booking cancelled successfully!');
+            window.location.reload();
+        } else {
+            alert(result.error || 'Failed to cancel booking');
+        }
+    } catch (error) {
+        alert('An error occurred while cancelling the booking');
+        console.error(error);
+    }
+}
+</script>
+{% endblock %}

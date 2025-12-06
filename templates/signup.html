@@ -1,0 +1,31 @@
+<!-- templates/signup.html -->
+{% extends "base.html" %}
+{% block title %}Sign Up - Airbnb Clone{% endblock %}
+{% block content %}
+<div class="auth-container">
+    <div class="auth-box">
+        <h1>Welcome to Airbnb Clone</h1>
+        <form id="signupForm">
+            <div class="form-group">
+                <label>Name</label>
+                <input type="text" name="name" required>
+            </div>
+            <div class="form-group">
+                <label>Email</label>
+                <input type="email" name="email" required>
+            </div>
+            <div class="form-group">
+                <label>Password</label>
+                <input type="password" name="password" required minlength="6">
+            </div>
+            <div id="errorMsg" class="error-msg hidden"></div>
+            <button type="submit" class="btn btn-primary btn-block">Sign Up</button>
+        </form>
+        <p class="auth-footer">
+            Already have an account? <a href="/auth/login">Log in</a>
+        </p>
+    </div>
+</div>
+
+<script src="/static/js/auth.js"></script>
+{% endblock %}
