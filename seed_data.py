@@ -220,7 +220,7 @@ def seed_database():
         (listing_ids[4], 'https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?w=800', 0),
         (listing_ids[4], 'https://images.unsplash.com/photo-1571003123894-1f0594d2b5d9?w=800', 1),
         # Alleppey Houseboat
-        (listing_ids[5], 'https://images.unsplash.com/photo-1605519171242-e91aca6da8ea?w=800', 0),
+        (listing_ids[5], 'https://images.unsplash.com/photo-1626621341517-bbf3d9990a23?w=800', 0),
         (listing_ids[5], 'https://images.unsplash.com/photo-1626621341517-bbf3d9990a23?w=800', 1),
         # Darjeeling Bungalow
         (listing_ids[6], 'https://images.unsplash.com/photo-1542718610-a1d656d1884c?w=800', 0),
