@@ -9,6 +9,12 @@ bat 'pip install -r requirements.txt'
 }
 }
 
+stage('Test') {
+steps {
+bat 'pytest'
+}
+}
+
 stage('Build Docker Image') {
 steps {
 bat 'docker build -t airbnb-python .'
