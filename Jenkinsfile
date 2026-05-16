@@ -39,7 +39,7 @@ steps{
 
     bat 'docker push abhiramraghunand/airbnb-clone:latest'
 }
-
+}
 stage('Start Monitoring') {
     steps {
 
