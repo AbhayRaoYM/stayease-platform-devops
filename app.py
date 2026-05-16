@@ -1,9 +1,11 @@
 from flask import Flask, render_template, session
+from prometheus_flask_exporter import PrometheusMetrics
 from config import Config
 from models import init_db
 import os
 
 app = Flask(__name__)
+metrics=PrometheusMetrics(app)
 app.config.from_object(Config)
 
 # Initialize database
