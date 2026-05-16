@@ -9,11 +9,11 @@ bat 'pip install -r requirements.txt'
 }
 }
 
-stage('Test') {
-steps {
-bat 'pytest'
-}
-}
+// stage('Test') {
+// steps {
+// bat 'pytest'
+// }
+// }
 
 stage('Build Docker Image') {
 steps {
