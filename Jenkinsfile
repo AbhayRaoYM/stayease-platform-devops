@@ -33,5 +33,12 @@ airbnb-clone
 '''
 }
 }
+stage('Push Image'){
+steps{
+    bat 'docker tag airbnb-clone abhiramraghunand/airbnb-clone:latest'
+
+    bat 'docker push abhiramraghunand/airbnb-clone:latest'
+}
+}
 }
 }
