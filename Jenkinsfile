@@ -39,6 +39,30 @@ steps{
 
     bat 'docker push abhiramraghunand/airbnb-clone:latest'
 }
+
+stage('Start Monitoring') {
+    steps {
+
+        bat '''
+        docker stop prometheus || exit 0
+        docker rm prometheus || exit 0
+
+        docker stop grafana || exit 0
+        docker rm grafana || exit 0
+
+        docker run -d ^
+        -p 9090:9090 ^
+        -v %cd%/monitoring/prometheus.yml:/etc/prometheus/prometheus.yml ^
+        --name prometheus ^
+        prom/prometheus
+
+        docker run -d ^
+        -p 3000:3000 ^
+        --name grafana ^
+        grafana/grafana
+        '''
+    }
+}
 }
 }
 }
