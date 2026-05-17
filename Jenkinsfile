@@ -35,9 +35,15 @@ airbnb-clone
 }
 stage('Push Image'){
 steps{
-    bat 'docker tag airbnb-clone abhiramraghunand/airbnb-clone:latest'
-
-    bat 'docker push abhiramraghunand/airbnb-clone:latest'
+     withCredentials([usernamePassword(
+            credentialsId:'dockerhub-creds',
+            usernameVariable:'DOCKER_USER',
+            passwordVariable:'DOCKER_PASS'
+        )]) {
+            bat 'docker login -u %DOCKER_USER% -p %DOCKER_PASS%'
+            bat 'docker tag airbnb-clone abhiramraghunand/airbnb-clone:latest'
+            bat 'docker push abhiramraghunand/airbnb-clone:latest'
+        }
 }
 }
 
