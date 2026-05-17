@@ -1,4 +1,4 @@
-from flask import Flask, render_template, session,request
+from flask import Flask, render_template, session,request,g
 from prometheus_client import Counter, Histogram, generate_latest
 from prometheus_client import CONTENT_TYPE_LATEST
 from config import Config
@@ -33,7 +33,7 @@ app.register_blueprint(bookings_bp)
 
 @app.before_request
 def before_request():
-    request.start_time = time.time()
+    g.start_time = time.time()
 
 
 @app.after_request
@@ -45,7 +45,7 @@ def after_request(response):
     ).inc()
 
     REQUEST_LATENCY.observe(
-        time.time() - request.start_time
+        time.time() - g.start_time
     )
 
     return response
@@ -69,4 +69,4 @@ def metrics():
 
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0',port=5000,debug=True)
+    app.run(host='0.0.0.0',port=5000,debug=False)
