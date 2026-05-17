@@ -17,7 +17,7 @@ bat 'pip install -r requirements.txt'
 
 stage('Build Docker Image') {
 steps {
-bat 'docker build -t airbnb-python .'
+bat 'docker build -t airbnb-clone .'
 }
 }
 
@@ -39,6 +39,21 @@ steps{
 
     bat 'docker push abhiramraghunand/airbnb-clone:latest'
 }
+}
+
+stage('Run Prometheus') {
+    steps {
+        bat '''
+        docker stop prometheus || exit 0
+        docker rm prometheus || exit 0
+
+        docker run -d ^
+        --name prometheus ^
+        -p 9090:9090 ^
+        -v %WORKSPACE%\\prometheus.yml:/etc/prometheus/prometheus.yml ^
+        prom/prometheus
+        '''
+    }
 }
 
 }
