@@ -48,7 +48,7 @@ bat '''
 docker stop airbnb || exit 0
 docker rm airbnb || exit 0
 docker run -d -p 5000:5000 ^
--v airbnb_data:/app ^
+-v airbnb_data:/app/airbnb.db ^
 --name airbnb ^
 airbnb-clone
 '''
