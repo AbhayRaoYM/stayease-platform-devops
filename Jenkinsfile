@@ -3,6 +3,13 @@ agent any
 
 stages {
 
+stage('Checkout Code') {
+            steps {
+                git branch: 'main',
+                url: 'YOUR_GITHUB_REPO_URL'
+            }
+        }
+        
 stage('Install Dependencies') {
 steps {
 bat 'pip install -r requirements.txt'
