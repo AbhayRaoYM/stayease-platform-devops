@@ -6,4 +6,4 @@ scrape_configs:
 
     static_configs:
       - targets:
-          - airbnb:5000
+          - host.docker.internal:5000
