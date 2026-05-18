@@ -1,7 +1,16 @@
 pipeline {
 agent any
 
+
 stages {
+
+stage('Debug Files') {
+    steps {
+        bat 'dir'
+        bat 'findstr metrics app.py'
+    }
+}
+
 stage('Clean Workspace') {
         steps {
             deleteDir()
